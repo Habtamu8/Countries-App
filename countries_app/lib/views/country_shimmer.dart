@@ -7,7 +7,7 @@ class CountryShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: Colors.grey[300]!,
+      baseColor: Colors.white,  
       highlightColor: Colors.grey[100]!,
       child: ListTile(
         leading: Container(width: 50, height: 30, color: Colors.white),
