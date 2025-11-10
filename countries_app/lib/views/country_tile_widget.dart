@@ -1,7 +1,10 @@
 // widgets/country_tile.dart
+import 'package:countries_app/blocs/favorites_bloc.dart' show FavoritesBloc;
+import 'package:countries_app/blocs/favorites_event.dart' show RemoveFavorite, AddFavorite;
+import 'package:countries_app/blocs/favorites_state.dart' show FavoritesState, FavoritesLoaded;
 import 'package:countries_app/models/country_model.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart' show BlocBuilder, ReadContext;
 
 class CountryTile extends StatelessWidget {
   final Country country;
@@ -20,18 +23,35 @@ class CountryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: Image.network(
-        country.flag,
-        width: 50,
-        height: 30,
-        fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) => const Icon(Icons.flag),
-      ),
-      title: Text(country.name),
-      subtitle: Text('Population: $formattedPopulation'),
-      onTap: () {
-        // Navigate to country details screen later
+    return BlocBuilder<FavoritesBloc, FavoritesState>(
+      builder: (context, state) {
+        bool isFav = false;
+        if (state is FavoritesLoaded) {
+          isFav = state.contains(country);
+        }
+
+        return ListTile(
+          leading: Image.network(
+            country.flag,
+            width: 50,
+            height: 30,
+            fit: BoxFit.cover,
+            errorBuilder: (_, __, ___) => const Icon(Icons.flag),
+          ),
+          title: Text(country.name),
+          subtitle: Text('Population: $formattedPopulation'),
+          trailing: IconButton(
+            icon: Icon(isFav ? Icons.heart_broken : Icons.heart_broken),
+            onPressed: () {
+              if (isFav) {
+                context.read<FavoritesBloc>().add(RemoveFavorite(country));
+              } else {
+                context.read<FavoritesBloc>().add(AddFavorite(country));
+              }
+            },
+          ),
+          onTap: () {},
+        );
       },
     );
   }
