@@ -1,3 +1,4 @@
+import 'package:countries_app/views/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,11 +17,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         colorSchemeSeed: Colors.blue,
       ),
-      home: const Scaffold(
-        
-        body: Center(
-          child: Text('Home Screen Placeholder')),
-      ),
+      home: HomeScreen()
     );
   }
 }

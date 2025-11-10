@@ -33,6 +33,8 @@ dependencies:
 
   cupertino_icons: ^1.0.8
   dio: ^5.9.0
+  flutter_bloc: ^9.1.1
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:
