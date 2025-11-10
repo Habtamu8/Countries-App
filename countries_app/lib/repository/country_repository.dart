@@ -7,7 +7,7 @@ class CountryRepository {
 
   Future<List<Country>> fetchCountries() async {
     try {
-      final response = await _dio.get('https://restcountries.com/v3.1/all');
+      final response = await _dio.get('https://restcountries.com/v3.1/all?fields=name,flags,population,cca2');
       List<Country> countries = (response.data as List)
           .map((json) => Country.fromJson(json))
           .toList();
