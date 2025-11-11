@@ -1,9 +1,6 @@
 // screens/home_screen.dart
 import 'package:countries_app/blocs/country_bloc.dart' show CountryBloc;
-import 'package:countries_app/blocs/country_event.dart' show FetchCountries;
 import 'package:countries_app/blocs/country_state.dart';
-import 'package:countries_app/blocs/favorites_bloc.dart' show FavoritesBloc;
-import 'package:countries_app/repository/country_repository.dart';
 import 'package:countries_app/views/country_shimmer.dart';
 import 'package:countries_app/views/country_tile_widget.dart';
 import 'package:countries_app/views/favorites_screen.dart' show FavoritesScreen;
@@ -22,12 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (_) => CountryBloc(CountryRepository())..add(FetchCountries())),
-        BlocProvider(create: (_) => FavoritesBloc()),
-      ],
-      child: Scaffold(
+    return
+       Scaffold(
         appBar: AppBar(
           title: const Text('Countries'),
           bottom: currentIndex == 0 // show search only in home tab
@@ -59,8 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
             BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorites'),
           ],
         ),
-      ),
-    );
+      );
+  
   }
 
   Widget _buildCountriesList() {

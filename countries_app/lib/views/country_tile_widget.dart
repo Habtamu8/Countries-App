@@ -3,6 +3,7 @@ import 'package:countries_app/blocs/favorites_bloc.dart' show FavoritesBloc;
 import 'package:countries_app/blocs/favorites_event.dart' show RemoveFavorite, AddFavorite;
 import 'package:countries_app/blocs/favorites_state.dart' show FavoritesState, FavoritesLoaded;
 import 'package:countries_app/models/country_model.dart';
+import 'package:countries_app/views/country_detail_screen.dart' show CountryDetailScreen;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocBuilder, ReadContext;
 
@@ -29,6 +30,7 @@ class CountryTile extends StatelessWidget {
         if (state is FavoritesLoaded) {
           isFav = state.contains(country);
         }
+         
 
         return ListTile(
           leading: Image.network(
@@ -41,7 +43,7 @@ class CountryTile extends StatelessWidget {
           title: Text(country.name),
           subtitle: Text('Population: $formattedPopulation'),
           trailing: IconButton(
-            icon: Icon(isFav ? Icons.heart_broken : Icons.heart_broken),
+            icon: Icon(isFav ? Icons.favorite : Icons.favorite),
             onPressed: () {
               if (isFav) {
                 context.read<FavoritesBloc>().add(RemoveFavorite(country));
@@ -50,7 +52,14 @@ class CountryTile extends StatelessWidget {
               }
             },
           ),
-          onTap: () {},
+         onTap: () {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (_) => CountryDetailScreen(country: country),
+              ),
+            );
+           },
         );
       },
     );
