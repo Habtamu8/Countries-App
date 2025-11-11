@@ -8,4 +8,10 @@ This app shows countries with some spesfic information.
 I used Bloc state managment to build this app because of BLoC (Business Logic Component) separates UI from business logic, which improves maintainability and testability.
 
 N.B in the detialed screen of the app, the Region and sub region fetches 
- 
+
+
+N.B in the detailed screen of the app, the Region and sub region fetches the number of people and the country name. i used this for showcase purpose only, the detailed data of REST API from app requirement description is not working. it displays like this
+{
+"message": "Bad Request",
+"status": 400
+}
