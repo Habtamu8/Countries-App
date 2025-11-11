@@ -4,7 +4,6 @@ import 'package:countries_app/views/country_tile_widget.dart' show CountryTile;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class FavoritesScreen extends StatelessWidget {
   const FavoritesScreen({super.key});
 
@@ -15,10 +14,11 @@ class FavoritesScreen extends StatelessWidget {
         if (state is FavoritesLoaded && state.favorites.isNotEmpty) {
           return ListView.builder(
             itemCount: state.favorites.length,
-            itemBuilder: (_, index) => CountryTile(country: state.favorites[index]),
+            itemBuilder: (_, index) {
+              return CountryTile(country: state.favorites[index]);
+            },
           );
         }
-
         return const Center(child: Text('No favorites yet'));
       },
     );
